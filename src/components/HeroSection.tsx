@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Phone, Globe, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { gsap } from "gsap";
 import mainLogo from "@/assets/final-logo.png";
 import accentLogo from "@/assets/final-footer-logo.png";
 import studentsImage from "@/assets/students-1.jpg";
@@ -64,8 +65,71 @@ const HeroSection = () => {
     }
   };
 
+  const heroRef = useRef<HTMLElement | null>(null);
+  const formCardRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!heroRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(".hero-logo", {
+        y: -20,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+
+      gsap.from(".hero-heading", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: 0.1,
+      });
+
+      gsap.from(".hero-form-card", {
+        y: 40,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        delay: 0.2,
+      });
+
+      gsap.from(".hero-copy", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: 0.25,
+        stagger: 0.1,
+      });
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
+    if (!formCardRef.current) return;
+    if (window.innerWidth < 768) return;
+
+    const { clientX, clientY } = event;
+    const x = (clientX / window.innerWidth - 0.5) * 18;
+    const y = (clientY / window.innerHeight - 0.5) * 18;
+
+    gsap.to(formCardRef.current, {
+      x,
+      y,
+      duration: 0.6,
+      ease: "power2.out",
+    });
+  };
+
   return (
-    <section className="relative bg-[#020617] text-white">
+    <section
+      ref={heroRef}
+      onMouseMove={handleMouseMove}
+      className="relative bg-[#020617] text-white min-h-screen overflow-hidden"
+    >
       <div className="absolute inset-0 -z-20">
         <img
           src={studentsImage}
@@ -84,9 +148,9 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="container mx-auto px-6 md:px-10 lg:px-16 pt-20 pb-10 md:pt-24 md:pb-14 lg:pt-28 lg:pb-16 relative z-10 min-h-[80vh] flex flex-col">
+      <div className="container mx-auto px-6 md:px-10 lg:px-16 py-8 md:py-10 lg:py-12 relative z-10 min-h-screen flex flex-col justify-between">
         <header className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 md:gap-4 rounded-full bg-white/95 px-3 py-1.5 md:px-4 md:py-2 border border-slate-200 shadow-[0_14px_40px_rgba(15,23,42,0.6)]">
+          <div className="hero-logo flex items-center gap-3 md:gap-4 rounded-full bg-white/95 px-3 py-1.5 md:px-4 md:py-2 border border-slate-200 shadow-[0_14px_40px_rgba(15,23,42,0.6)]">
             <img
               src={mainLogo}
               alt="HIRA Institute logo"
@@ -105,11 +169,11 @@ const HeroSection = () => {
 
         <main className="mt-6 grid gap-10 md:gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start max-w-6xl mx-auto w-full">
           <div className="space-y-6 md:space-y-8 lg:space-y-9">
-            <div className="space-y-3 md:space-y-4 max-w-2xl">
+            <div className="hero-heading space-y-3 md:space-y-4 max-w-2xl">
               <span className="inline-flex items-center gap-2 rounded-full bg-sky-500/15 px-4 py-1.5 text-xs md:text-sm font-semibold text-sky-300 ring-1 ring-sky-500/40">
                 Louisville, Kentucky • Islamic School & Tahfiz
               </span>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight md:leading-tight lg:leading-[1.1] font-serif">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight md:leading-tight lg:leading-[1.15] font-serif">
                 <span className="block">HIRA INSTITUTE</span>
                 <span className="block text-sky-300">
                   School Admissions 2026–2027
@@ -117,7 +181,7 @@ const HeroSection = () => {
               </h1>
             </div>
 
-            <div className="space-y-6">
+            <div className="hero-copy hidden lg:block space-y-6">
               <p className="text-sm md:text-lg text-slate-200 max-w-xl">
                 A full-time Islamic school, Tahfiz, and &apos;Alimiyyah environment where
                 students excel academically, morally, socially, and spiritually with Quran
@@ -155,44 +219,47 @@ const HeroSection = () => {
                   <span className="font-semibold text-sky-300">(Abu Dawood)</span>
                 </p>
               </div>
-            </div>
 
-            <div className="mt-6 bg-sky-600 rounded-2xl p-4 md:p-5 flex flex-wrap items-center justify-between gap-4 text-white">
-              <div className="flex flex-wrap items-center gap-6">
-                <a
-                  href="tel:5023094472"
-                  className="flex items-center gap-2 hover:text-sky-100 transition-colors"
-                >
-                  <Phone className="h-5 w-5" />
-                  <span className="font-semibold">502 309 4472</span>
-                </a>
-                <a
-                  href="https://wa.me/15023094472"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-sky-100 transition-colors"
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  <span className="font-semibold">WhatsApp</span>
-                </a>
-                <a
-                  href="https://www.hirainstitute.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-sky-100 transition-colors"
-                >
-                  <Globe className="h-5 w-5" />
-                  <span className="font-semibold">www.hirainstitute.org</span>
-                </a>
+              <div className="mt-6 bg-sky-600 rounded-2xl p-4 md:p-5 flex flex-wrap items-center justify-between gap-4 text-white">
+                <div className="flex flex-wrap items-center gap-6">
+                  <a
+                    href="tel:5023094472"
+                    className="flex items-center gap-2 hover:text-sky-100 transition-colors"
+                  >
+                    <Phone className="h-5 w-5" />
+                    <span className="font-semibold">502 309 4472</span>
+                  </a>
+                  <a
+                    href="https://wa.me/15023094472"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-sky-100 transition-colors"
+                  >
+                    <MessageCircle className="h-5 w-5" />
+                    <span className="font-semibold">WhatsApp</span>
+                  </a>
+                  <a
+                    href="https://www.hirainstitute.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-sky-100 transition-colors"
+                  >
+                    <Globe className="h-5 w-5" />
+                    <span className="font-semibold">www.hirainstitute.org</span>
+                  </a>
+                </div>
+                <p className="text-xs text-sky-100/90">
+                  © 2026 HIRA Institute. All rights reserved.
+                </p>
               </div>
-              <p className="text-xs text-sky-100/90">
-                © 2026 HIRA Institute. All rights reserved.
-              </p>
             </div>
           </div>
 
           <aside className="w-full max-w-md justify-self-center lg:justify-self-end lg:max-w-md">
-            <div className="bg-white rounded-[28px] shadow-[0_20px_60px_rgba(15,23,42,0.9)] border border-sky-500/15 p-4 md:p-5 lg:p-6">
+            <div
+              ref={formCardRef}
+              className="hero-form-card bg-white rounded-[28px] shadow-[0_20px_60px_rgba(15,23,42,0.9)] border border-sky-500/15 p-4 md:p-5 lg:p-6"
+            >
               <div className="mb-4 flex items-center justify-between">
                 <div>
                   <p className="text-[11px] uppercase tracking-[0.25em] text-slate-400">
@@ -291,6 +358,70 @@ const HeroSection = () => {
               </p>
             </div>
           </aside>
+
+          <div className="hero-copy mt-6 space-y-6 lg:hidden">
+            <p className="text-sm md:text-base text-slate-200 max-w-xl">
+              A full-time Islamic school, Tahfiz, and &apos;Alimiyyah environment where
+              students excel academically, morally, socially, and spiritually with Quran and
+              Sunnah at the center.
+            </p>
+
+            <ul className="grid gap-2.5 text-sm text-slate-100">
+              <li className="flex items-start gap-2">
+                <span className="mt-1 h-1.5 w-4 rounded-full bg-sky-400" />
+                <span>
+                  Full-time Tahfiz and &apos;Alimiyyah programs with integrated academics.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1 h-1.5 w-4 rounded-full bg-sky-400" />
+                <span>
+                  Accredited K–12 Islamic schooling on a 35,000 sq ft campus in Louisville.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1 h-1.5 w-4 rounded-full bg-sky-400" />
+                <span>Safe, mindful community focused on character, adab, and service.</span>
+              </li>
+            </ul>
+
+            <div className="rounded-2xl border border-sky-500/25 bg-slate-950/80 p-4 shadow-[0_18px_50px_rgba(15,23,42,0.9)] backdrop-blur">
+              <p
+                className="mb-2 text-right text-lg font-serif leading-relaxed text-sky-100"
+                dir="rtl"
+              >
+                إِنَّ الْمَلَائِكَةَ لَتَضَعُ أَجْنِحَتَهَا رِضًا لِطَالِبِ الْعِلْمِ
+              </p>
+              <p className="text-xs italic text-slate-300">
+                The angels lower their wings being pleased for the seeker of knowledge.{" "}
+                <span className="font-semibold text-sky-300">(Abu Dawood)</span>
+              </p>
+            </div>
+
+            <div className="bg-sky-600 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 text-white">
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href="tel:5023094472"
+                  className="flex items-center gap-2 hover:text-sky-100 transition-colors"
+                >
+                  <Phone className="h-5 w-5" />
+                  <span className="font-semibold">502 309 4472</span>
+                </a>
+                <a
+                  href="https://wa.me/15023094472"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-sky-100 transition-colors"
+                >
+                  <MessageCircle className="h-5 w-5" />
+                  <span className="font-semibold">WhatsApp</span>
+                </a>
+              </div>
+              <p className="text-[11px] text-sky-100/90">
+                © 2026 HIRA Institute. All rights reserved.
+              </p>
+            </div>
+          </div>
         </main>
       </div>
       <div className="fixed left-4 bottom-6 z-40 md:hidden">
