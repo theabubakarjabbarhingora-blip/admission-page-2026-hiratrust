@@ -149,7 +149,7 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto px-6 md:px-10 lg:px-16 py-8 md:py-10 lg:py-12 relative z-10 min-h-screen flex flex-col justify-between">
-        <header className="flex items-center justify-between gap-4">
+        <header className="flex items-center justify-between gap-4 max-w-6xl mx-auto w-full">
           <div className="hero-logo flex items-center gap-3 md:gap-4 rounded-full bg-white/95 px-3 py-1.5 md:px-4 md:py-2 border border-slate-200 shadow-[0_14px_40px_rgba(15,23,42,0.6)]">
             <img
               src={mainLogo}
@@ -167,7 +167,7 @@ const HeroSection = () => {
           </div>
         </header>
 
-        <main className="mt-4 grid gap-10 md:gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start max-w-6xl mx-auto w-full">
+        <main className="mt-3 grid gap-6 md:gap-8 lg:gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start max-w-6xl mx-auto w-full">
           <div className="space-y-6 md:space-y-8 lg:space-y-9">
             <div className="hero-heading space-y-3 md:space-y-4 max-w-2xl">
               <span className="inline-flex items-center gap-2 rounded-full bg-sky-500/15 px-4 py-1.5 text-xs md:text-sm font-semibold text-sky-300 ring-1 ring-sky-500/40">
@@ -255,7 +255,7 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <aside className="w-full max-w-md justify-self-center lg:justify-self-end lg:max-w-md">
+          <aside className="w-full max-w-md justify-self-start lg:justify-self-start lg:max-w-md">
             <div
               ref={formCardRef}
               className="hero-form-card bg-white rounded-[28px] shadow-[0_20px_60px_rgba(15,23,42,0.9)] border border-sky-500/15 p-4 md:p-5 lg:p-6"
