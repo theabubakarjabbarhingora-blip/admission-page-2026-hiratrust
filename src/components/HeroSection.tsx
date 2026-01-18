@@ -167,7 +167,7 @@ const HeroSection = () => {
           </div>
         </header>
 
-        <main className="mt-6 grid gap-10 md:gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start max-w-6xl mx-auto w-full">
+        <main className="mt-4 grid gap-10 md:gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start max-w-6xl mx-auto w-full">
           <div className="space-y-6 md:space-y-8 lg:space-y-9">
             <div className="hero-heading space-y-3 md:space-y-4 max-w-2xl">
               <span className="inline-flex items-center gap-2 rounded-full bg-sky-500/15 px-4 py-1.5 text-xs md:text-sm font-semibold text-sky-300 ring-1 ring-sky-500/40">
@@ -262,9 +262,6 @@ const HeroSection = () => {
             >
               <div className="mb-4 flex items-center justify-between">
                 <div>
-                  <p className="text-[11px] uppercase tracking-[0.25em] text-slate-400">
-                    Secure inquiry
-                  </p>
                   <h2 className="text-lg md:text-xl font-serif font-bold text-slate-900">
                     Get started at HIRA Institute
                   </h2>
@@ -327,7 +324,7 @@ const HeroSection = () => {
                   disabled={isSubmitting}
                   className="w-full h-11 bg-sky-500 text-white text-xs md:text-sm font-semibold shadow-lg hover:bg-sky-400 transition-transform duration-300 hover:-translate-y-0.5"
                 >
-                  {isSubmitting ? "Submitting..." : "Request Information"}
+                  {isSubmitting ? "Submitting..." : "Submit"}
                 </Button>
               </form>
 
