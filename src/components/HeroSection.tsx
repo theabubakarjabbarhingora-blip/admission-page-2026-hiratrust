@@ -167,7 +167,7 @@ const HeroSection = () => {
           </div>
         </header>
 
-        <main className="mt-3 grid gap-6 md:gap-8 lg:gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start w-full">
+        <main className="mt-3 grid gap-6 md:gap-8 lg:gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start max-w-6xl mx-auto w-full">
           <div className="space-y-6 md:space-y-8 lg:space-y-9">
             <div className="hero-heading space-y-3 md:space-y-4 max-w-2xl">
               <span className="inline-flex items-center gap-2 rounded-full bg-sky-500/15 px-4 py-1.5 text-xs md:text-sm font-semibold text-sky-300 ring-1 ring-sky-500/40">
