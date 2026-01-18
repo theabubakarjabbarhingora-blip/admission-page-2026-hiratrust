@@ -21,7 +21,7 @@ const Footer = () => {
   return (
     <footer className="bg-primary text-white">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* About */}
           <div>
             <div className="flex items-center gap-3 mb-6">
@@ -143,7 +143,7 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-white/60 text-sm">
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-white/60 text-sm">
             <p>© 2026 HIRA Institute. All rights reserved.</p>
             <div className="flex gap-6">
               <a

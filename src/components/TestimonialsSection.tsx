@@ -71,7 +71,8 @@ const TestimonialsSection = () => {
   return (
     <section className="py-20 bg-slate-50">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mb-8 md:mb-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="max-w-3xl mb-8 md:mb-10">
           <span className="inline-block px-4 py-2 bg-secondary/10 text-secondary rounded-full text-xs md:text-sm font-medium mb-3">
             Testimonials
           </span>
@@ -82,9 +83,9 @@ const TestimonialsSection = () => {
             Hear from parents and students whose lives have been impacted by a learning
             environment rooted in Quran, Sunnah, and academic excellence.
           </p>
-        </div>
+          </div>
 
-        <Carousel
+          <Carousel
           opts={{
             align: "start",
             loop: true,
@@ -114,7 +115,8 @@ const TestimonialsSection = () => {
           </CarouselContent>
           <CarouselPrevious className="hidden md:flex" />
           <CarouselNext className="hidden md:flex" />
-        </Carousel>
+          </Carousel>
+        </div>
       </div>
     </section>
   );

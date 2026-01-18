@@ -22,7 +22,7 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-16 md:py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
           <div className="relative lg:sticky lg:top-24">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
