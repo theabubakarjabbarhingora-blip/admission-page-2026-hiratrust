@@ -124,6 +124,21 @@ const HeroSection = () => {
     });
   };
 
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = event.target.value.replace(/\D/g, "");
+    setFormData({ ...formData, phone: numericValue });
+  };
+
+  const handlePhoneKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const allowedKeys = ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab", "Home", "End"];
+
+    if (/^[0-9]$/.test(event.key) || allowedKeys.includes(event.key)) {
+      return;
+    }
+
+    event.preventDefault();
+  };
+
   return (
     <section
       ref={heroRef}
@@ -279,7 +294,7 @@ const HeroSection = () => {
                   placeholder="Full Name *"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="h-10 border-slate-200 focus-visible:ring-sky-500 text-xs md:text-sm"
+                  className="h-10 border-slate-200 focus-visible:ring-sky-500 text-xs md:text-sm bg-white text-slate-900 placeholder:text-slate-500"
                 />
                 <Input
                   required
@@ -287,21 +302,24 @@ const HeroSection = () => {
                   placeholder="Email Address *"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="h-10 border-slate-200 focus-visible:ring-sky-500 text-xs md:text-sm"
+                  className="h-10 border-slate-200 focus-visible:ring-sky-500 text-xs md:text-sm bg-white text-slate-900 placeholder:text-slate-500"
                 />
                 <Input
                   required
                   type="tel"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   placeholder="Phone Number *"
                   value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="h-10 border-slate-200 focus-visible:ring-sky-500 text-xs md:text-sm"
+                  onChange={handlePhoneChange}
+                  onKeyDown={handlePhoneKeyDown}
+                  className="h-10 border-slate-200 focus-visible:ring-sky-500 text-xs md:text-sm bg-white text-slate-900 placeholder:text-slate-500"
                 />
                 <select
                   required
                   value={formData.program}
                   onChange={(e) => setFormData({ ...formData, program: e.target.value })}
-                  className="w-full h-10 rounded-md border border-slate-200 bg-background px-3 text-xs md:text-sm text-foreground focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+                  className="w-full h-10 rounded-md border border-slate-200 bg-white px-3 text-xs md:text-sm text-slate-900 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
                 >
                   <option value="">Select Program *</option>
                   <option value="preschool">Pre School</option>
@@ -317,7 +335,7 @@ const HeroSection = () => {
                   placeholder="Tell us about your child or questions you have (optional)"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="border-slate-200 focus-visible:ring-sky-500 text-xs md:text-sm"
+                  className="border-slate-200 focus-visible:ring-sky-500 text-xs md:text-sm bg-white text-slate-900 placeholder:text-slate-500"
                 />
                 <Button
                   type="submit"
