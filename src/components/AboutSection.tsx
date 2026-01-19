@@ -1,6 +1,6 @@
 import { Award, Users, BookOpen, Target, GraduationCap, Heart, Building2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import aboutImage from "@/assets/singlewindow-lighting-building-based-islamic-architecture.jpg";
+import aboutImage from "@/assets/hira-about.jpg";
 
 const AboutSection = () => {
   const stats = [
