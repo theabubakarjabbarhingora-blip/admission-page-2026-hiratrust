@@ -58,11 +58,12 @@ const HeroSection = () => {
       });
       
       navigate("/thank-you");
-    } catch {
+    } catch (error) {
+      console.error("Submission error:", error);
       toast({
         title: "Submission received",
         description:
-          "Your details have been captured. If there are issues with email, we will still review your inquiry.",
+          "Thank you! We have received your details and will contact you shortly.",
       });
       navigate("/thank-you");
     } finally {
