@@ -322,13 +322,15 @@ const HeroSection = () => {
                   className="w-full h-10 rounded-md border border-slate-200 bg-white px-3 text-xs md:text-sm text-slate-900 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
                 >
                   <option value="">Select Program *</option>
-                  <option value="preschool">Pre School</option>
+                  <option value="preschool">Preschool</option>
+                  <option value="prek">Pre K</option>
                   <option value="kindergarten">Kindergarten</option>
-                  <option value="grade1">Grade 1</option>
-                  <option value="grade2">Grade 2</option>
-                  <option value="tahfiz">Tahfiz & Academics</option>
-                  <option value="alimiyyah">&apos;Alimiyyah & Academics</option>
-                  <option value="k12">K-12 & College Pathways</option>
+                  <option value="grades1_2">Grades 1 & 2</option>
+                  <option value="grades3_5_tahfeedh">Grades 3 - 5 with Tahfeedh</option>
+                  <option value="middle_school_tahfeedh">Middle school with Tahfeedh</option>
+                  <option value="high_school_tahfeedh">High school with Tahfeedh</option>
+                  <option value="high_school_alimiyyah">High school with Alimiyyah</option>
+                  <option value="college_alimiyyah">College Alimiyyah Courses</option>
                 </select>
                 <Textarea
                   rows={3}
