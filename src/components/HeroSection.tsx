@@ -5,12 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { gsap } from "gsap";
+import { useNavigate } from "react-router-dom";
 import mainLogo from "@/assets/final-logo.png";
 import accentLogo from "@/assets/final-footer-logo.png";
 import studentsImage from "@/assets/students-1.jpg";
 
 const HeroSection = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -54,12 +56,15 @@ const HeroSection = () => {
         program: "",
         message: "",
       });
+      
+      navigate("/thank-you");
     } catch {
       toast({
         title: "Submission received",
         description:
           "Your details have been captured. If there are issues with email, we will still review your inquiry.",
       });
+      navigate("/thank-you");
     } finally {
       setIsSubmitting(false);
     }
