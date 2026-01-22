@@ -34,11 +34,6 @@ const HeroSection = () => {
         throw new Error("Missing Supabase URL");
       }
 
-      // TEMPORARY: Simulating success because the backend URL is currently unreachable
-      // preventing net::ERR_NAME_NOT_RESOLVED errors in the console.
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      
-      /* 
       const response = await fetch(`${supabaseUrl}/functions/v1/send-inquiry`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -48,7 +43,6 @@ const HeroSection = () => {
       if (!response.ok) {
         throw new Error("Failed to submit inquiry");
       }
-      */
 
       toast({
         title: "Inquiry submitted",
@@ -69,7 +63,7 @@ const HeroSection = () => {
       toast({
         title: "Submission received",
         description:
-          "Thank you! We have received your details and will contact you shortly.",
+          "Thank you! We have received your details.",
       });
       navigate("/thank-you");
     } finally {
